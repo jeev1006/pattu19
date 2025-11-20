@@ -356,45 +356,79 @@ html,body{height:100%;font-family:'Georgia',serif;background:#000;overflow-x:hid
     100%{transform:translateX(0)}
 }
 
-/* ---------- HIDE DESKTOP POLAROID ROWS ON MOBILE ---------- */
+/* ---------------- MOBILE POLAROID GRID (Option B) ---------------- */
 @media (max-width: 768px) {
 
-    /* Hide the original row layout */
-    .polaroid-row.top,
-    .polaroid-row.middle,
-    .polaroid-row.bottom,
+    /* Turn polaroids into a neat 3-column grid */
+    .polaroid-container {
+        position: relative;
+        inset: 0;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding-top: 22vh;   /* moves grid below the opening area */
+        pointer-events: none;
+    }
+
+    /* All rows become one unified grid on mobile */
+    .polaroid-row,
     .middle-left,
     .middle-right {
+        position: static;
+        transform: none;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        width: 90%;
+        margin: auto;
+        pointer-events: none;
+    }
+
+    /* Remove middle gap space */
+    .middle-spacer {
         display: none !important;
     }
 
-    /* Only show the main container as grid */
-    .polaroid-container {
-        display: grid !important;
-        grid-template-columns: repeat(1, 1fr);
-        gap: 20px;
-        width: 90%;
-        margin: 150px auto;
-        pointer-events: auto;
-        position: relative !important;
-    }
-
-    /* Make polaroids full mobile width */
+    /* Scale polaroids down for mobile */
     .polaroid {
-        width: 100% !important;
-        max-width: 100% !important;
-        padding: 12px 12px 35px !important;
+        width: 100%;
+        padding: 10px 10px 28px;
+        pointer-events: auto;
     }
 
     .polaroid img {
-        width: 100% !important;
-        height: auto !important;
+        height: 95px;
     }
 
-    /* Optional: Remove pins/strings on mobile */
-    .polaroid::before,
+    /* Adjust the pin + string smaller too */
+    .polaroid::before {
+        top: -35px;
+        width: 50px;
+        height: 28px;
+    }
     .polaroid::after {
-        display: none !important;
+        top: -14px;
+        width: 12px;
+        height: 18px;
+    }
+
+    /* Move envelope downward slightly so it doesn't overlap */
+    .envelope-container {
+        transform: translate(-50%, -50%) scale(0.75);
+        top: 50%;
+    }
+
+    /* Letter modal scale */
+    .letter-content {
+        width: 95%;
+        font-size: 18px;
+        line-height: 1.45;
+    }
+
+    /* Password modal adjust */
+    .password-box {
+        width: 85%;
+        padding: 20px;
     }
 }
 
@@ -700,6 +734,7 @@ modal.onclick=e=>{
 
 </body>
 </html>
+
 
 
 
