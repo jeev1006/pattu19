@@ -356,92 +356,79 @@ html,body{height:100%;font-family:'Georgia',serif;background:#000;overflow-x:hid
     100%{transform:translateX(0)}
 }
 
-/* ---------------- FIXED FINAL MOBILE LAYOUT ---------------- */
+/* ------------------ TRUE FINAL MOBILE FIX ------------------ */
 @media (max-width: 768px) {
 
-    /* Allow scrolling */
-    html, body {
-        height: auto !important;
-        overflow-y: auto !important;
+    /* Prevent fixed layout on mobile */
+    .polaroid-container {
+        position: static !important;
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 18px !important;
+        width: 90% !important;
+        margin: 140px auto 40px auto !important;
+        padding-top: 0 !important;
+        inset: unset !important;
+        left: unset !important;
+        right: unset !important;
+        top: unset !important;
+        bottom: unset !important;
+        transform: none !important;
+        pointer-events: auto !important;
+        z-index: 5 !important;
     }
 
-    /* STOP desktop layout from affecting mobile */
-    .polaroid-container,
+    /* Disable desktop rows completely */
     .polaroid-row,
     .middle-left,
     .middle-right {
         position: static !important;
+        inset: unset !important;
         top: unset !important;
         left: unset !important;
-        right: unset !important;
-        bottom: unset !important;
         transform: none !important;
-        inset: unset !important;
+        display: contents !important;  /* LET CHILDREN FLOW */
+        gap: 0 !important;
+        width: 100% !important;
         pointer-events: auto !important;
     }
 
-    /* Convert ALL polaroids into one clean grid */
-    .polaroid-container {
-        display: grid !important;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
-        width: 90%;
-        margin: 160px auto 40px auto !important;
-        z-index: 5 !important;
-    }
-
-    /* Adjust polaroid size */
+    /* Polaroid card itself */
     .polaroid {
         width: 100% !important;
-        padding: 10px 10px 30px !important;
+        padding: 10px 10px 26px !important;
         margin: 0 !important;
+        pointer-events: auto !important;
+        position: relative !important;
+        animation: none !important; /* remove sway for clean grid */
     }
-
     .polaroid img {
         height: 115px !important;
     }
 
-    /* Pin + string smaller */
+    /* Reduce string and pin */
     .polaroid::before {
-        top: -30px !important;
+        top: -28px !important;
         width: 50px !important;
         height: 26px !important;
     }
-
     .polaroid::after {
         top: -12px !important;
         width: 14px !important;
-        height: 20px !important;
+        height: 18px !important;
     }
 
-    /* Envelope placed AFTER the grid */
+    /* Envelope BELOW grid */
     .envelope-container {
         position: relative !important;
         top: unset !important;
         left: 50% !important;
-        transform: translateX(-50%) scale(0.85) !important;
-        margin-top: 10px !important;
-        margin-bottom: 50px !important;
+        transform: translateX(-50%) scale(0.9) !important;
+        margin-top: 20px !important;
+        margin-bottom: 40px !important;
         z-index: 10 !important;
     }
-
-    /* Hearts float above everything */
-    .hearts-layer {
-        z-index: 20 !important;
-    }
-
-    /* Letter modal fits better */
-    .letter-content {
-        width: 92% !important;
-        font-size: 18px !important;
-    }
-
-    /* Fix password modal width */
-    .password-box {
-        width: 85% !important;
-    }
 }
-
 
 
 
@@ -746,6 +733,7 @@ modal.onclick=e=>{
 
 </body>
 </html>
+
 
 
 
