@@ -356,6 +356,92 @@ html,body{height:100%;font-family:'Georgia',serif;background:#000;overflow-x:hid
     100%{transform:translateX(0)}
 }
 
+/* ------------------ MOBILE RESPONSIVE FIXES ------------------ */
+@media (max-width: 768px) {
+
+    /* Opening title scale */
+    .opening-title {
+        font-size: 38px;
+        line-height: 1.2;
+    }
+
+    /* Polaroid sizes */
+    .polaroid {
+        width: 110px;
+        padding: 10px 10px 30px;
+    }
+    .polaroid img {
+        height: 100px;
+    }
+
+    /* Adjust hanging pin & string */
+    .polaroid::before {
+        top: -40px;
+        width: 60px;
+        height: 30px;
+    }
+    .polaroid::after {
+        top: -12px;
+        width: 12px;
+        height: 18px;
+    }
+
+    /* Rows spacing */
+    .polaroid-row.top {
+        top: 6vh;
+        gap: 14px;
+    }
+    .polaroid-row.middle {
+        top: 48%;
+    }
+    .polaroid-row.bottom {
+        top: 74vh;
+        gap: 14px;
+    }
+
+    /* Middle spacer smaller */
+    .middle-spacer {
+        width: 120px;
+    }
+
+    /* Envelope center */
+    .envelope-container {
+        transform: translate(-50%, -50%) scale(0.7);
+    }
+
+    /* Letter modal size */
+    .letter-content {
+        width: 92%;
+        max-width: 95%;
+        padding: 20px;
+        font-size: 18px;
+        line-height: 1.45;
+    }
+    .letter-content h1 {
+        font-size: 28px;
+    }
+
+    /* Password modal fit */
+    .password-box {
+        width: 85%;
+        padding: 20px;
+    }
+    .password-input input {
+        width: 60%;
+        font-size: 16px;
+    }
+
+    /* Hearts & balloons scale down */
+    .floating-heart {
+        font-size: 18px !important;
+    }
+    .balloon {
+        transform: scale(0.7);
+    }
+
+}
+
+
 </style>
 </head>
 <body>
@@ -657,3 +743,4 @@ modal.onclick=e=>{
 
 </body>
 </html>
+
