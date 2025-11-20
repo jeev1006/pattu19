@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Yatish!</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;font-family:'Georgia',serif;background:#000;overflow-x:hidden}
+
+/* ------------------------------------------------ */
+/*                OPENING SCREEN                    */
+/* ------------------------------------------------ */
+
+.opening-screen{
+    position:fixed;inset:0;
+    background:radial-gradient(circle,#000,#060606,#000);
+    display:flex;justify-content:center;align-items:center;
+    overflow:hidden;z-index:9999;
+}
+
+/* Polaroid hanging string */
+.polaroid::before{
+    content:"";
+    position:absolute;
+    top:-55px;
+    left:50%;
+    width:90px;
+    height:50px;
+    border-bottom:2px solid rgba(255,255,255,0.8);
+    border-radius:0 0 60px 60px;
+    transform:translateX(-50%);
+}
+
+/* Gentle sway animation */
+@keyframes polaroidSway {
+    0%   { transform: rotate(-3deg); }
+    50%  { transform: rotate(3deg); }
+    100% { transform: rotate(-3deg); }
+}
+
+/* Apply sway to every polaroid */
+.polaroid {
+    animation: polaroidSway 4s ease-in-out infinite;
+}
+
+
+/* Polaroid clothespin */
+.polaroid::after{
+    content:"";
+    position:absolute;
+    top:-20px;
+    left:50%;
+    width:16px;
+    height:24px;
+    background:linear-gradient(135deg,#e5d0b8,#bfa98c);
+    border-radius:3px;
+    transform:translateX(-50%);
+    box-shadow:0 2px 4px rgba(0,0,0,0.3);
+}
+
+.letter-content {
+    font-family: 'Dancing Script', cursive !important;
+    font-size: 24px;
+    line-height: 1.55;
+    letter-spacing: 0.4px;
+}
+.letter-content h1 {
+    font-family: 'Dancing Script', cursive !important;
+    font-size: 40px;
+    margin-bottom: 18px;
+}
+
+.opening-title{
+    font-size:70px;
+    font-weight:900;
+    text-align:center;
+    color:#ffddb0;
+    line-height:1.1;
+    opacity:0;
+    animation:fadeIn 1.2s ease forwards 0.3s;
+}
+
+@keyframes fadeIn{
+    to{opacity:1}
+}
+
+/* EXPLOSIVE BOUNCE EFFECT (Style 2 chosen) */
+.opening-title span{
+    display:inline-block;
+    opacity:0;
+    transform:scale(0.3) translateY(40px) rotate(-25deg);
+    animation:explode 0.6s cubic-bezier(.18,.89,.32,1.28) forwards;
+}
+
+@keyframes explode{
+    0%{opacity:0;transform:scale(0.3) translateY(40px) rotate(-25deg)}
+    70%{opacity:1;transform:scale(1.2) translateY(-8px) rotate(2deg)}
+    100%{opacity:1;transform:scale(1) translateY(0) rotate(0)}
+}
+
+/* BACKGROUND FX */
+@keyframes bgShift{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+.shimmer{
+    position:absolute;inset:0;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,0.14),transparent);
+    animation:moveShimmer 4s ease infinite;
+}
+
+@keyframes moveShimmer{
+    0%{transform:translateX(-120%)}
+    60%{transform:translateX(120%)}
+    100%{transform:translateX(120%)}
+}
+
+/* SPARKLES */
+.sparkle{
+    position:absolute;width:6px;height:6px;border-radius:50%;
+    background:white;opacity:0;
+    animation:twinkle 2.6s infinite;
+}
+@keyframes twinkle{
+    0%,100%{opacity:0}
+    50%{opacity:1}
+}
+
+/* FIREWORK */
+.firework{
+    position:absolute;width:8px;height:8px;border-radius:50%;
+    background:white;opacity:0;
+    animation:burst 1.4s ease-out infinite;
+}
+@keyframes burst{
+    0%{opacity:1;transform:scale(1)}
+    100%{opacity:0;transform:scale(10)}
+}
+
+/* BALLOONS */
+.balloon{
+    position:absolute;width:40px;height:55px;
+    background:linear-gradient(180deg,#ff7b7b,#ffb199);
+    border-radius:50%;
+    animation:rise 10s linear infinite;
+}
+.balloon:after{
+    content:"";position:absolute;width:2px;height:20px;background:white;
+    bottom:-20px;left:50%;transform:translateX(-50%);
+}
+@keyframes rise{
+    0%{transform:translateY(100vh)}
+    100%{transform:translateY(-130vh)}
+}
+
+/* MAIN HIDDEN INITIALLY */
+.main-content{
+    opacity:0;pointer-events:none;transition:opacity 1s ease;
+}
+.main-content.visible{
+    opacity:1;pointer-events:auto;
+}
+
+/* ------------------------------------------------ */
+/*                BACKGROUND LAYERS                 */
+/* ------------------------------------------------ */
+.gradient-bg{
+    position:fixed;inset:0;z-index:0;
+    background:linear-gradient(150deg,#000,#0a0a0a,#000);
+    animation:bgShift 12s ease infinite;
+}
+.overlay{
+    position:fixed;inset:0;z-index:1;
+    background:radial-gradient(circle,transparent,rgba(0,0,0,.4));
+}
+.cinematic-grain{
+    position:fixed;inset:0;
+    background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIHWP8z8DwnwAHggL9Xk4HpwAAAABJRU5ErkJggg==');
+    opacity:.13;z-index:2;animation:grainMove .6s steps(2) infinite;
+}
+@keyframes grainMove{0%{transform:translate(0,0)}100%{transform:translate(-1px,1px)}}
+.vignette{
+    position:fixed;inset:0;background:radial-gradient(circle,transparent 55%,rgba(0,0,0,.7));
+    pointer-events:none;z-index:4;
+}
+
+/* HEARTS */
+.hearts-layer{position:fixed;inset:0;z-index:4;pointer-events:none;}
+.floating-heart{
+    position:absolute;opacity:0;
+    animation:heartFloat 10s linear infinite;
+}
+@keyframes heartFloat{
+    0%{transform:translateY(100vh);opacity:0}
+    15%{opacity:1}
+    85%{opacity:1}
+    100%{transform:translateY(-20vh);opacity:0}
+}
+
+/* ORBS */
+.parallax-orb{position:fixed;border-radius:50%;filter:blur(80px);opacity:.18;z-index:3;mix-blend-mode:screen;
+    animation:orbFloat 16s ease-in-out infinite;}
+@keyframes orbFloat{
+    0%{transform:translate(0,0)}
+    50%{transform:translate(40px,-40px)}
+    100%{transform:translate(0,0)}
+}
+
+/* ------------------------------------------------ */
+/*                 POLAROID CARDS                   */
+/* ------------------------------------------------ */
+
+.polaroid-container{
+    position:fixed;inset:0;z-index:5;pointer-events:none;
+}
+.polaroid-row{
+    position:absolute;left:50%;transform:translateX(-50%);
+    display:flex;gap:26px;
+}
+.polaroid-row.top{top:8vh}
+.polaroid-row.middle{top:50%;transform:translate(-50%,-50%)}
+.polaroid-row.bottom{top:70vh}
+
+.middle-left,.middle-right{
+    display:flex;gap:26px;
+}
+.middle-spacer{width:350px}
+
+.polaroid{
+    width:150px;background:white;padding:12px 12px 40px;
+    border-radius:4px;position:relative;
+    box-shadow:0 12px 32px rgba(0,0,0,.55);
+    pointer-events:auto;
+}
+.polaroid img{
+    width:100%;height:130px;border-radius:3px;object-fit:cover;
+}
+
+/* POLAROID POPUP */
+.polaroid-popup{
+    display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);
+    align-items:center;justify-content:center;z-index:9999;
+}
+.polaroid-popup.active{display:flex}
+.polaroid-close-btn{
+    position:absolute;top:20px;right:20px;width:44px;height:44px;
+    border:none;border-radius:50%;background:#222;color:white;
+    font-size:22px;cursor:pointer;
+}
+.polaroid-popup-content{background:white;padding:20px;border-radius:10px;}
+
+/* ------------------------------------------------ */
+/*                     ENVELOPE                     */
+/* ------------------------------------------------ */
+
+.envelope-container{
+    position:fixed;left:50%;top:50%;
+    transform:translate(-50%,-50%);z-index:10;cursor:pointer;
+}
+
+.envelope{width:340px;height:210px;position:relative;}
+.envelope-back{
+    position:absolute;inset:0;background:#fff5e6;
+    border:3px solid #d4a574;border-radius:6px;
+}
+.envelope-flap{
+    position:absolute;top:0;left:0;width:100%;height:110px;
+    background:linear-gradient(135deg,#d4a574,#b8935f);
+    clip-path:polygon(50% 100%,0 0,100% 0);
+    transform-origin:top center;transition:.7s;
+}
+.envelope-container.opened .envelope-flap{transform:rotateX(180deg)}
+
+.letter-preview{
+    position:absolute;top:20px;left:50%;transform:translateX(-50%);
+    color:white;font-weight:bold;font-size:18px;
+}
+
+/* LETTER */
+.modal{
+    display:none;position:fixed;inset:0;z-index:9999;
+    background:rgba(0,0,0,.8);justify-content:center;align-items:center;
+}
+.modal.active{display:flex}
+.letter-content{
+    background:#fffef8;padding:30px;max-width:760px;
+    width:90%;border-radius:12px;border:3px solid #d4a574;
+    max-height:85vh;overflow-y:auto;position:relative;
+}
+.close-btn{
+    position:absolute;top:15px;right:15px;width:40px;height:40px;
+    border:none;border-radius:50%;background:#d4a574;color:white;
+    font-size:20px;cursor:pointer;
+}
+
+/* ------------------------------------------------ */
+/*               PASSWORD MODAL (FANCY)             */
+/* ------------------------------------------------ */
+
+.password-modal{
+    position:fixed;inset:0;display:none;
+    background:rgba(0,0,0,.85);z-index:15000;
+    justify-content:center;align-items:center;
+    backdrop-filter:blur(4px);
+}
+
+.password-box{
+    width:360px;background:#141414;border-radius:12px;
+    padding:26px;position:relative;
+    box-shadow:0 0 22px rgba(255,215,120,0.12);
+    border:1px solid rgba(255,215,120,0.25);
+    opacity:0;transform:scale(.9);
+    animation:showBox .4s ease forwards;
+}
+@keyframes showBox{
+    to{opacity:1;transform:scale(1)}
+}
+
+.password-box h2{
+    text-align:center;color:#ffdca0;font-size:20px;margin-bottom:10px;
+}
+.password-desc{
+    text-align:center;color:#ccc;font-size:14px;margin-bottom:14px;
+}
+.password-input{
+    display:flex;justify-content:center;gap:10px;
+}
+.password-input input{
+    width:180px;padding:10px;border-radius:10px;
+    font-size:18px;text-align:center;background:#111;color:white;
+    border:1px solid #555;
+}
+.password-btn{
+    padding:10px 18px;background:linear-gradient(180deg,#ffd77a,#d8a84a);
+    border:none;border-radius:10px;font-weight:bold;cursor:pointer;
+}
+.password-error{
+    color:#ff6d6d;text-align:center;margin-top:10px;display:none;
+}
+.password-close{
+    position:absolute;top:8px;right:10px;font-size:24px;
+    background:none;border:none;color:#aaa;cursor:pointer;
+}
+
+@keyframes shake{
+    0%{transform:translateX(0)}
+    25%{transform:translateX(-8px)}
+    50%{transform:translateX(8px)}
+    75%{transform:translateX(-8px)}
+    100%{transform:translateX(0)}
+}
+
+</style>
+</head>
+<body>
+
+<!-- OPENING SCREEN -->
+<div class="opening-screen" id="openingScreen">
+    <div class="shimmer"></div>
+    <div id="openingSparkles"></div>
+    <div id="openingFireworks"></div>
+    <div id="openingBalloons"></div>
+
+    <div class="opening-title" id="titleHolder"></div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-content" id="mainContent">
+
+<div class="gradient-bg"></div>
+<div class="overlay"></div>
+<div class="cinematic-grain"></div>
+<div class="vignette"></div>
+
+<div class="hearts-layer" id="heartsLayer"></div>
+<div id="orbLayer"></div>
+
+<!-- POLAROIDS -->
+<div class="polaroid-container">
+    <div class="polaroid-row top" id="rowTop"></div>
+    <div class="polaroid-row middle">
+        <div class="middle-left" id="middleLeft"></div>
+        <div class="middle-spacer"></div>
+        <div class="middle-right" id="middleRight"></div>
+    </div>
+    <div class="polaroid-row bottom" id="rowBottom"></div>
+</div>
+
+<!-- ENVELOPE -->
+<div class="envelope-container" id="envelopeContainer">
+    <div class="envelope">
+        <div class="envelope-back"></div>
+        <div class="envelope-flap"></div>
+        <div class="letter-preview">Click to Open 💌</div>
+    </div>
+</div>
+
+<!-- PASSWORD MODAL -->
+<div class="password-modal" id="passwordModal">
+    <div class="password-box" id="passwordBox">
+        <button class="password-close" id="passwordClose">×</button>
+
+        <h2>Enter Password to Open 💌</h2>
+        <div class="password-desc">Type the secret 4-digit code.</div>
+
+        <div class="password-input">
+            <input type="password" id="passwordInput" placeholder="● ● ● ●" maxlength="8">
+            <button class="password-btn" id="passwordSubmit">Open</button>
+        </div>
+
+        <div class="password-error" id="passwordError">You're Not Yatish!</div>
+    </div>
+</div>
+
+<!-- LETTER -->
+<div class="modal" id="modal">
+    <div class="letter-content">
+        <button class="close-btn" id="closeBtn">×</button>
+        <h1>Happy Birthday Yatish❤️</h1>
+        <p>19 years of this amazing, wonderful and kind man on this Earth🌍… yet my kolundhe, a little kid inside.<br><br>
+
+Happy Birthday Pattu🥳. I love you so much kanna and I’m so endlessly grateful to have you in my life ♾️. You’re such a blessing pa, someone who gives warmth just by being yourself💜. You’re always there for everyone, you’re mature yet calm, steady yet soft and you’ve been brought up so beautifully❤️. From a mini cricket player to a tennis player, an artist and now an F1 fan studying ECE, you’ve grown in so many ways, and there’s still so much life waiting for you🤍. I promise you’ll reach great heights and I’ll be right beside you through every step, never leaving you pa🫂.<br><br>
+
+You make everyone around you feel loved and you’ve become the MAN you are today through everything you’ve seen in life and trust me you’re truly the BEST. The BEST SON, GRANDSON, BROTHER, FRIEND, BOYFRIEND AND HUMAN🫶. <br><br>
+
+All the moments we’ve spent together make me love you even more, understand you deeper and cherish you for exactly who you are💗. My thangoo, my pattu, my vairam, my kanna, my chellam, my aaruyire, my lucky charm and my purushaaaa🦋. <br><br>
+
+I hope you like the 19 gifts I gave you pa and I’ll give you many more gifts and so much more love throughout our journey💘. <br>
+A hundred reasons aren’t enough to explain my love for you. there’s everything I love about you, literally everything🥰. You’re so caring, jovial and lovable with everyone around you, even when you carry something heavy inside and I’ll always be the one to make it lighter for you😊. <br><br>
+
+Every day with you teaches me so many things and makes me improve myself🧸. You’ve shown me what it means to be cared for so genuinely and I treasure every small moment, every smile, every fight we overcame, every call, every hug, every little memory that has stitched us closer together💖.<br><br>
+
+I believe in you more than you know and I’ll keep cheering for you in every path you choose. No matter what happens in life, I’ll stand by you and push you to achieve all your dreams and goals as your life partner. You’re my comfort, my laughter, my safest place, my everything and my forever😍.<br><br>
+
+To my little vandu, Happiest 19th Birthday✨. </p>
+    </div>
+</div>
+
+<!-- POLAROID POPUP -->
+<div class="polaroid-popup" id="polaroidPopup">
+    <div class="polaroid-popup-content">
+        <button class="polaroid-close-btn" id="polaroidCloseBtn">×</button>
+        <img id="polaroidPopupImg">
+    </div>
+</div>
+
+</div>
+
+<script>
+
+/* ------------------ OPENING TITLE BUILD ------------------ */
+const titleText = "HAPPY 19TH\nBIRTHDAY\nS.J.YATISH!!!";
+const titleHolder = document.getElementById("titleHolder");
+
+function buildTitle(){
+    let delay = 0;
+
+    titleText.split("\n").forEach(line=>{
+        const div = document.createElement("div");
+        for(let ch of line){
+            const span = document.createElement("span");
+            span.textContent = ch === " " ? "\u00A0" : ch;
+            span.style.animationDelay = delay+"s";
+            delay += 0.08;  
+            div.appendChild(span);
+        }
+        titleHolder.appendChild(div);
+    });
+}
+buildTitle();
+
+/* SPARKLES */
+const openingSparkles = document.getElementById("openingSparkles");
+for(let i=0;i<20;i++){
+    const s=document.createElement("div");
+    s.className="sparkle";
+    s.style.left=Math.random()*100+"%";
+    s.style.top=Math.random()*100+"%";
+    s.style.animationDelay=Math.random()*3+"s";
+    openingSparkles.appendChild(s);
+}
+
+/* FIREWORKS */
+const openingFireworks=document.getElementById("openingFireworks");
+for(let i=0;i<8;i++){
+    const f=document.createElement("div");
+    f.className="firework";
+    f.style.left=Math.random()*100+"%";
+    f.style.top=(20+Math.random()*20)+"%";
+    f.style.animationDelay=(Math.random()*2)+"s";
+    openingFireworks.appendChild(f);
+}
+
+/* BALLOONS */
+const openingBalloons=document.getElementById("openingBalloons");
+for(let i=0;i<6;i++){
+    const b=document.createElement("div");
+    b.className="balloon";
+    b.style.left=Math.random()*90+"%";
+    b.style.animationDelay=Math.random()*4+"s";
+    openingBalloons.appendChild(b);
+}
+
+/* END OPENING AFTER 8 SECONDS */
+setTimeout(()=>{
+    document.getElementById("openingScreen").style.display="none";
+    document.getElementById("mainContent").classList.add("visible");
+},8000);
+
+
+/* ------------------ FLOATING HEARTS ------------------ */
+const heartsLayer=document.getElementById("heartsLayer");
+const heartArr=["💕","💖","💗","💞","💓","❤️","💘"];
+
+function spawnHeart(){
+    const h=document.createElement("div");
+    h.className="floating-heart";
+    h.textContent=heartArr[Math.floor(Math.random()*heartArr.length)];
+    h.style.left=Math.random()*100+"%";
+    h.style.fontSize=(22+Math.random()*26)+"px";
+    heartsLayer.appendChild(h);
+    setTimeout(()=>h.remove(),9500);
+}
+setInterval(spawnHeart,600);
+
+
+/* ------------------ ORBS ------------------ */
+const orbLayer=document.getElementById("orbLayer");
+for(let i=0;i<6;i++){
+    const orb=document.createElement("div");
+    orb.className="parallax-orb";
+    let s=200+Math.random()*200;
+    orb.style.width=s+"px";
+    orb.style.height=s+"px";
+    orb.style.left=Math.random()*100+"%";
+    orb.style.top=Math.random()*100+"%";
+    orb.style.background=`radial-gradient(circle,
+        hsla(${Math.random()*360},90%,60%,0.7),
+        transparent 70%)`;
+    orbLayer.appendChild(orb);
+}
+
+
+/* ------------------ POLAROID RANDOM SHUFFLE ------------------ */
+
+function shuffle(arr){
+    for(let i=arr.length-1;i>0;i--){
+        let j=Math.floor(Math.random()*(i+1));
+        [arr[i],arr[j]]=[arr[j],arr[i]];
+    }
+}
+
+function makePolaroid(num){
+    const div=document.createElement("div");
+    div.className="polaroid";
+    const imgSrc=`photos/i${num}.jpg`;
+    div.innerHTML=`<img src="${imgSrc}">`;
+    div.onclick=()=>{
+        document.getElementById("polaroidPopupImg").src=imgSrc;
+        document.getElementById("polaroidPopup").classList.add("active");
+    }
+    return div;
+}
+
+let nums=[...Array(19).keys()].map(x=>x+1);
+shuffle(nums);
+
+const rowTop=document.getElementById("rowTop");
+const middleLeft=document.getElementById("middleLeft");
+const middleRight=document.getElementById("middleRight");
+const rowBottom=document.getElementById("rowBottom");
+
+let i=0;
+
+/* TOP 7 */
+for(;i<7;i++) rowTop.appendChild(makePolaroid(nums[i]));
+
+/* MIDDLE LEFT 2 */
+middleLeft.appendChild(makePolaroid(nums[i++]));
+middleLeft.appendChild(makePolaroid(nums[i++]));
+
+/* MIDDLE RIGHT 2 */
+middleRight.appendChild(makePolaroid(nums[i++]));
+middleRight.appendChild(makePolaroid(nums[i++]));
+
+/* BOTTOM 8 */
+for(;i<19;i++) rowBottom.appendChild(makePolaroid(nums[i]));
+
+
+/* ------------------ POLAROID POPUP CLOSE ------------------ */
+document.getElementById("polaroidCloseBtn").onclick=()=>{
+    document.getElementById("polaroidPopup").classList.remove("active");
+};
+
+
+/* ------------------ PASSWORD SYSTEM ------------------ */
+const envelope=document.getElementById("envelopeContainer");
+const modal=document.getElementById("modal");
+
+const passwordModal=document.getElementById("passwordModal");
+const passwordInput=document.getElementById("passwordInput");
+const passwordSubmit=document.getElementById("passwordSubmit");
+const passwordError=document.getElementById("passwordError");
+const passwordClose=document.getElementById("passwordClose");
+const CORRECT_PASSWORD="1122";
+
+/* show password modal */
+envelope.onclick=()=>{
+    passwordModal.style.display="flex";
+    passwordInput.value="";
+    passwordError.style.display="none";
+    setTimeout(()=>passwordInput.focus(),100);
+};
+
+/* check password */
+function checkPassword(){
+    if(passwordInput.value===CORRECT_PASSWORD){
+        passwordModal.style.display="none";
+        envelope.classList.add("opened");
+        setTimeout(()=>modal.classList.add("active"),700);
+    }else{
+        passwordError.style.display="block";
+        document.getElementById("passwordBox").style.animation="shake .4s";
+        setTimeout(()=>document.getElementById("passwordBox").style.animation="",500);
+        passwordInput.value="";
+        passwordInput.focus();
+    }
+}
+
+passwordSubmit.onclick=checkPassword;
+passwordInput.onkeydown=e=>{
+    if(e.key==="Enter") checkPassword();
+    if(e.key==="Escape") passwordModal.style.display="none";
+}
+passwordClose.onclick=()=> passwordModal.style.display="none";
+
+
+/* ------------------ LETTER CLOSE ------------------ */
+document.getElementById("closeBtn").onclick=()=>{
+    modal.classList.remove("active");
+    envelope.classList.remove("opened");
+};
+modal.onclick=e=>{
+    if(e.target===modal){
+        modal.classList.remove("active");
+        envelope.classList.remove("opened");
+    }
+};
+
+</script>
+
+</body>
+</html>
