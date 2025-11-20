@@ -1,1 +1,1 @@
-these are photos used for main.html
+these are photos used for index.html
